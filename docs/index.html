@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donggo - Go 언어 유틸리티 라이브러리</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Highlight.js for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">Donggo</a>
+            <button class="mobile-menu-button" aria-label="메뉴">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#installation">설치</a></li>
+                <li><a href="#documentation">문서</a></li>
+                <li><a href="https://github.com/zkfmapf123/donggo" target="_blank">GitHub</a></li>
+                <li>
+                    <button class="theme-toggle" aria-label="테마 변경">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Donggo</h1>
+                <p class="subtitle">JavaScript 스타일의 함수들을 Go 언어에서 사용하세요. 함수형 프로그래밍과 유틸리티 함수들을 Go에서도 편리하게 사용할 수 있습니다.</p>
+                <div class="cta-buttons">
+                    <a href="#documentation" class="button primary">문서 보기</a>
+                    <a href="https://github.com/zkfmapf123/donggo" class="button secondary" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Playground Section -->
+        <section id="playground" class="playground">
+            <h2>코드 플레이그라운드</h2>
+            <p class="playground-subtitle">Donggo의 함수들을 직접 실행해보세요.</p>
+
+            <div class="playground-container">
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <select id="example-select" class="example-select">
+                            <option value="contains">Contains 예제</option>
+                            <option value="object">Object Functions 예제</option>
+                            <option value="json">JSON Functions 예제</option>
+                            <option value="axios">Axios 예제</option>
+                            <option value="pipe">Pipeline Functions 예제</option>
+                        </select>
+                        <button id="run-button" class="run-button">
+                            <i class="fas fa-play"></i> 실행
+                        </button>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+                <div class="output-container">
+                    <div class="output-header">
+                        <h3>실행 결과</h3>
+                        <button id="clear-button" class="clear-button">
+                            <i class="fas fa-trash"></i> 초기화
+                        </button>
+                    </div>
+                    <div id="output" class="output"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documentation Section -->
+        <section id="documentation" class="documentation">
+            <h2>문서</h2>
+            <p class="documentation-subtitle">Donggo의 모든 함수와 사용법을 확인하세요.</p>
+
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h3>목차</h3>
+                <div class="toc-category">
+                    <h4>Array Functions</h4>
+                    <ul>
+                        <li><a href="#contains">Contains</a></li>
+                    </ul>
+                </div>
+                <div class="toc-category">
+                    <h4>Object Functions</h4>
+                    <ul>
+                        <li><a href="#okeys">OKeys</a></li>
+                        <li><a href="#ovalues">OValues</a></li>
+                        <li><a href="#oentries">OEntries</a></li>
+                    </ul>
+                </div>
+                <div class="toc-category">
+                    <h4>JSON Functions</h4>
+                    <ul>
+                        <li><a href="#jsonstringify">JsonStringify</a></li>
+                        <li><a href="#jsonparse">JsonParse</a></li>
+                    </ul>
+                </div>
+                <div class="toc-category">
+                    <h4>HTTP Client</h4>
+                    <ul>
+                        <li><a href="#axios">Axios</a></li>
+                    </ul>
+                </div>
+                <div class="toc-category">
+                    <h4>Pipeline Functions</h4>
+                    <ul>
+                        <li><a href="#pipe">Pipe</a></li>
+                        <li><a href="#pipewitherror">PipeWithError</a></li>
+                        <li><a href="#pipewiths">PipeWiths</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Documentation Content -->
+            <div class="doc-content">
+                <!-- Array Functions -->
+                <div class="doc-section">
+                    <h3>Array Functions</h3>
+                    <div class="doc-list">
+                        <div id="contains" class="doc-item">
+                            <h4>Contains[T any]</h4>
+                            <p>배열에 특정 값이 포함되어 있는지 검사합니다.</p>
+                            <div class="code-example">
+                                <pre><code class="language-go">arr := []int{1, 2, 3, 4, 5}
+result := Contains(arr, 3)  // true
+
+strArr := []string{"apple", "banana", "orange"}
+result = Contains(strArr, "banana")  // true</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Object Functions -->
+                <div class="doc-section">
+                    <h3>Object Functions</h3>
+                    <div class="doc-list">
+                        <div id="okeys" class="doc-item">
+                            <h4>OKeys[T any]</h4>
+                            <p>객체의 키 목록을 반환합니다.</p>
+                            <div class="code-example">
+                                <pre><code class="language-go">m := map[string]int{
+    "apple":  1,
+    "banana": 2,
+    "orange": 3,
+}
+keys := OKeys(m)  // []string{"apple", "banana", "orange"}</code></pre>
+                            </div>
+                        </div>
+
+                        <div id="ovalues" class="doc-item">
+                            <h4>OValues[T any]</h4>
+                            <p>객체의 값 목록을 반환합니다.</p>
+                            <div class="code-example">
+                                <pre><code class="language-go">m := map[string]int{
+    "a": 1,
+    "b": 2,
+    "c": 3,
+}
+values := OValues(m)  // []int{1, 2, 3}</code></pre>
+                            </div>
+                        </div>
+
+                        <div id="oentries" class="doc-item">
+                            <h4>OEntries[T any]</h4>
+                            <p>객체의 키-값 쌍을 반환합니다.</p>
+                            <div class="code-example">
+                                <pre><code class="language-go">m := map[string]int{
+    "a": 1,
+    "b": 2,
+}
+entries := OEntries(m)  // [][]any{{"a", 1}, {"b", 2}}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JSON Functions -->
+                <div class="doc-section">
+                    <h3>JSON Functions</h3>
+                    <div class="doc-list">
+                        <div id="jsonstringify" class="doc-item">
+                            <h4>JsonStringify[T any]</h4>
+                            <p>JavaScript의 JSON.stringify와 동일한 기능을 수행합니다. 객체를 JSON 문자열로 변환합니다.</p>
+                            <div class="code-example">
+                                <pre><code class="language-go">data := map[string]interface{}{"name": "John", "age": 30}
+jsonStr, err := JsonStringify(data)
+// jsonStr: `{"name":"John","age":30}`</code></pre>
+                            </div>
+                        </div>
+
+                        <div id="jsonparse" class="doc-item">
+                            <h4>JsonParse[T any]</h4>
+                            <p>JavaScript의 JSON.parse와 동일한 기능을 수행합니다. JSON 문자열을 객체로 변환합니다.</p>
+                            <div class="code-example">
+                                <pre><code class="language-go">jsonStr := `{"name":"John","age":30}`
+var result map[string]interface{}
+err := JsonParse(jsonStr, &result)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HTTP Client -->
+                <div class="doc-section">
+                    <h3>HTTP Client</h3>
+                    <div class="doc-list">
+                        <div id="axios" class="doc-item">
+                            <h4>Axios[T, Res any]</h4>
+                            <p>타입 안전한 HTTP 요청/응답을 처리합니다.</p>
+                            <div class="code-example">
+                                <pre><code class="language-go">type User struct {
+    ID   int    `json:"id"`
+    Name string `json:"name"`
+}
+
+var user User
+status, err := Axios[struct{}, User](
+    struct{}{},
+    WithURL("https://api.example.com/users/1"),
+    WithMethod("GET"),
+)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pipeline Functions -->
+                <div class="doc-section">
+                    <h3>Pipeline Functions</h3>
+                    <div class="doc-list">
+                        <div id="pipe" class="doc-item">
+                            <h4>Pipe[T any]</h4>
+                            <p>기본 파이프라인 함수로, 데이터 변환을 선언적으로 작성할 수 있습니다.</p>
+                            <div class="code-example">
+                                <pre><code class="language-go">result := Pipe("hello world",
+    strings.ToUpper,
+    func(s string) string { return strings.ReplaceAll(s, " ", "_") },
+)  // "HELLO_WORLD"</code></pre>
+                            </div>
+                        </div>
+
+                        <div id="pipewitherror" class="doc-item">
+                            <h4>PipeWithError[T any]</h4>
+                            <p>에러 처리가 가능한 파이프라인입니다.</p>
+                            <div class="code-example">
+                                <pre><code class="language-go">type User struct {
+    Name string
+    Age  int
+}
+
+user, err := PipeWithError(User{Name: "홍길동", Age: 30},
+    func(u User) (User, error) {
+        if u.Age < 0 {
+            return u, fmt.Errorf("나이는 음수일 수 없습니다")
+        }
+        return u, nil
+    },
+)</code></pre>
+                            </div>
+                        </div>
+
+                        <div id="pipewiths" class="doc-item">
+                            <h4>PipeWiths</h4>
+                            <p>타입 변환이 가능한 파이프라인입니다.</p>
+                            <div class="code-example">
+                                <pre><code class="language-go">result := PipeWiths(42,
+    func(v any) any { return float64(v.(int)) * 1.5 },
+    func(v any) any { return fmt.Sprintf("결과: %.1f", v) },
+)  // "결과: 63.0"</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="installation" class="installation">
+            <div class="container">
+                <h2>설치 방법</h2>
+                <div class="install-steps">
+                    <div class="step">
+                        <h3>1. Go 모듈 설치</h3>
+                        <pre><code class="language-bash">go get github.com/zkfmapf123/donggo</code></pre>
+                    </div>
+                    <div class="step">
+                        <h3>2. 코드에서 import</h3>
+                        <pre><code class="language-go">import "github.com/zkfmapf123/donggo"</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 Donggo. MIT License.</p>
+            <div class="footer-links">
+                <a href="https://github.com/zkfmapf123/donggo" target="_blank">GitHub</a>
+                <a href="https://github.com/zkfmapf123/donggo/blob/master/LICENSE" target="_blank">License</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Monaco Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+    <script src="js/playground.js"></script>
+    <script src="js/main.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html> 
